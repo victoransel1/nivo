@@ -56,8 +56,7 @@ const NetworkCanvas = () => {
             {(properties, data, theme, logAction) => {
                 return (
                     <ResponsiveNetworkCanvas
-                        nodes={data.nodes}
-                        links={data.links}
+                        data={data}
                         {...properties}
                         theme={theme}
                         onClick={node => {

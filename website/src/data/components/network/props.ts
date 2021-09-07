@@ -4,6 +4,30 @@ import { ChartProperty } from '../../../types'
 
 const props: ChartProperty[] = [
     {
+        key: 'data',
+        group: 'Base',
+        type: '{ nodes: object[], links: object[] }',
+        required: true,
+        help: 'Chart data defining nodes and links.',
+        flavors: ['svg', 'canvas'],
+        description: `
+            Chart data, which must conform to this structure:
+
+            \`\`\`
+            {
+                nodes: {
+                    id: string
+                }[],
+                links: {
+                    source: string, // ref to node id
+                    target: string, // ref to node id
+                    value:  number
+                }[]
+            }
+            \`\`\`
+        `,
+    },
+    {
         key: 'width',
         group: 'Base',
         help: 'Chart width.',
@@ -43,13 +67,13 @@ const props: ChartProperty[] = [
     },
     {
         key: 'pixelRatio',
+        group: 'Base',
         flavors: ['canvas'],
         help: `Adjust pixel ratio, useful for HiDPI screens.`,
         defaultValue: 'Depends on device',
         type: `number`,
         required: false,
         controlType: 'range',
-        group: 'Base',
         controlOptions: {
             min: 1,
             max: 2,
@@ -218,7 +242,7 @@ const props: ChartProperty[] = [
         defaultValue: NetworkDefaultProps.layers,
         flavors: ['svg', 'canvas'],
     },
-    ...motionProperties(['svg'], NetworkDefaultProps),
+    ...motionProperties(['svg'], NetworkDefaultProps, 'react-spring'),
 ]
 
 export const groups = groupProperties(props)

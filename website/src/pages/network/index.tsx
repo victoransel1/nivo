@@ -30,8 +30,7 @@ const initialProperties = Object.freeze({
     isInteractive: true,
 
     animate: true,
-    motionStiffness: 160,
-    motionDamping: 12,
+    motionConfig: 'wobbly',
 })
 
 const generateData = () => generateNetworkData()
@@ -53,8 +52,7 @@ const Network = () => {
             {(properties, data, theme, logAction) => {
                 return (
                     <ResponsiveNetwork
-                        nodes={data.nodes}
-                        links={data.links}
+                        data={data}
                         {...properties}
                         theme={theme}
                         onClick={node => {

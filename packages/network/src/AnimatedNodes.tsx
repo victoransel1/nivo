@@ -1,5 +1,4 @@
 import { memo } from 'react'
-import PropTypes from 'prop-types'
 import { TransitionMotion, spring } from 'react-motion'
 import { useMotionConfig } from '@nivo/core'
 import Node from './Node'
@@ -18,7 +17,21 @@ const willLeave = springConfig => ({ style }) => ({
     scale: spring(0, springConfig),
 })
 
-const AnimatedNodes = ({ nodes, color, borderColor, ...props }) => {
+interface AnimatedNodesProps {
+    // nodes: PropTypes.array.isRequired,
+    nodes: any[]
+    // color: PropTypes.func.isRequired,
+    color: Function
+    borderWidth: number
+    // borderColor: PropTypes.func.isRequired,
+    borderColor: Function
+    // handleNodeHover: PropTypes.func.isRequired,
+    handleNodeHover: Function
+    // handleNodeLeave: PropTypes.func.isRequired,
+    handleNodeLeave: Function
+}
+
+const AnimatedNodes = ({ nodes, color, borderColor, ...props }: AnimatedNodesProps) => {
     const { springConfig } = useMotionConfig()
 
     return (
@@ -57,15 +70,6 @@ const AnimatedNodes = ({ nodes, color, borderColor, ...props }) => {
             )}
         </TransitionMotion>
     )
-}
-
-AnimatedNodes.propTypes = {
-    nodes: PropTypes.array.isRequired,
-    color: PropTypes.func.isRequired,
-    borderWidth: PropTypes.number.isRequired,
-    borderColor: PropTypes.func.isRequired,
-    handleNodeHover: PropTypes.func.isRequired,
-    handleNodeLeave: PropTypes.func.isRequired,
 }
 
 export default memo(AnimatedNodes)
